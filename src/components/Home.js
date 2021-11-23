@@ -18,7 +18,7 @@ const Home = () => {
     setList(jsonData);
   };
   // fakestore();
-    const addtoCart{}
+  // const addtoCart{}
 
   return (
     <>
@@ -36,12 +36,13 @@ const Home = () => {
                 <img src={values.image} alt="" />
                 <p className="text-center">Price - {values.price}</p>
                 <p className="text-center">Category - {values.category}</p>
-                {/* <p className="text-center">Rating - {values.rating}</p> */}
+                <p className="text-center">Rating - {values.rating.rate}</p>
 
+                <p className="text-center">Rating - {values.rating.count}</p>
 
                 <div className="text-center">
-                  <button className="btn btn-success btn-sm mt-3" onClick={addtoCart.bind(this, values)}>
-                    {" "}
+                  <button className="btn btn-success btn-sm mt-3">
+                    {/* <button className="btn btn-success btn-sm mt-3" onClick={addtoCart.bind(this, values)}> */}{" "}
                     + Add To Cart
                   </button>
                 </div>
