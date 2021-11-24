@@ -1,55 +1,50 @@
 import React, { useEffect, useState } from "react";
 import "./Home.css";
 import ItemSearch from "./MainPage";
+import HomeList from "./HomeList";
+import { useDispatch, useSelector } from "react-redux";
+import { getProduct } from "../redux/actions";
 
 const Home = () => {
-  let [list, setList] = useState([]);
-  console.log("3", list);
+  const [prolist, setProlist] = useState([]);
+  const [error, setError] = useState(null);
+
+  let dispatch = useDispatch();
+  const productList = useSelector((state) => state);
 
   useEffect(() => {
-    fakestore();
+    dispatch(getProduct());
   }, []);
 
-  const fakestore = async () => {
-    const response = await fetch("https://fakestoreapi.com/products");
-    console.log("1", response);
-    const jsonData = await response.json();
-    console.log("2", jsonData);
-    setList(jsonData);
-  };
-  // fakestore();
-  // const addtoCart{}
+  useEffect(() => {
+    if (productList.list.data) {
+      setProlist(productList.list.data);
+    } else if (productList.list.error) {
+      setError(productList.list.error);
+    }
+  }, [productList.list]);
+
 
   return (
     <>
-      <div className="container products-list">
+      <div className="container">
         <ItemSearch />
-        {list.map((values) => {
-          return (
-            <>
-              <div className="box">
-                <div className="content">
-                  <p>{values.id}</p>
-                  <h5>{values.title}</h5>
-                  <p>Product description - {values.description}</p>
-                </div>
-                <img src={values.image} alt="" />
-                <p className="text-center">Price - {values.price}</p>
-                <p className="text-center">Category - {values.category}</p>
-                <p className="text-center">Rating - {values.rating.rate}</p>
-
-                <p className="text-center">Rating - {values.rating.count}</p>
-
-                <div className="text-center">
-                  <button className="btn btn-success btn-sm mt-3">
-                    {/* <button className="btn btn-success btn-sm mt-3" onClick={addtoCart.bind(this, values)}> */}{" "}
-                    + Add To Cart
-                  </button>
-                </div>
-              </div>
-            </>
-          );
-        })}
+        <div className="row">
+          {error ? (
+            <div>{error}</div>
+          ) : (
+            prolist &&
+            prolist.map((values) => {
+              return (
+                <>
+                  <div className="col-md-4 product-items">
+                    <HomeList values={values} />
+                  </div>
+                </>
+              );
+            })
+          )}
+        </div>
       </div>
     </>
   );
