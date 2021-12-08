@@ -1,47 +1,27 @@
 import React from "react";
 import shirt from "../components/Assets/shirt.png";
+import { deleteItem } from "../redux/actions";
+import { useDispatch } from "react-redux";
+
+
+
 import "./cart.css";
 
-const CartItems = () => {
+const CartItems = ({ cval }) => {
+  // console.log("z", cval);
+  let dispatch = useDispatch();
+
+
   return (
     <>
       <tr>
         <td>
-          <div className="row">
-            <div className="col-lg-2 Product-img">
-              <img
-                src={shirt}
-                alt="shirt"
-                className="img-responsive Product-img1"
-              />
-            </div>
-            <div className="col-lg-10">
-              <h5 className="nomargin">
-                {" "}
-                <b> White Shirt </b>{" "}
-              </h5>
-              <p> Cotton </p>
-            </div>
-          </div>
+          <img src={cval.image} style={{width: "49px", height:"55px"}}/>
         </td>
-        <td>
-          {" "}
-          <strong> 10,000 </strong>{" "}
-        </td>
-        <td data-th="Quantity">
-          <b>
-            {" "}
-            <input
-              type="number"
-              className="form-control text-center"
-              value="1"
-            />{" "}
-          </b>
-        </td>
-        <td>
-          {" "}
-          <strong> 10,000 </strong>{" "}
-        </td>
+        <td>{cval.price}</td>
+        <td>{cval.qty}</td>
+        <td>{Number(cval.price) * Number(cval.qty)}</td>
+        <td><button className="btn btn-danger btn-sm" onClick={() => dispatch(deleteItem(cval.id))}>Delete Item</button></td>
       </tr>
     </>
   );

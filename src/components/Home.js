@@ -7,34 +7,52 @@ import { getProduct } from "../redux/actions";
 
 const Home = () => {
   const [prolist, setProlist] = useState([]);
+  console.log("prolist", prolist);
   const [error, setError] = useState(null);
+  const [searchString, setSearchString] = useState([]);
+
+
 
   let dispatch = useDispatch();
-  const productList = useSelector((state) => state);
+  const productList = useSelector((state) => state.getProduct);
 
   useEffect(() => {
     dispatch(getProduct());
   }, []);
 
+  console.log("hiii",productList);
   useEffect(() => {
     if (productList.list.data) {
+      console.log("z",productList)
       setProlist(productList.list.data);
     } else if (productList.list.error) {
       setError(productList.list.error);
     }
   }, [productList.list]);
 
+//
+  const handleSearch = (searchStr) =>{
+    setSearchString(searchStr);
+  }
+
 
   return (
     <>
       <div className="container">
-        <ItemSearch />
+        <ItemSearch handleSearch={handleSearch}/>
         <div className="row">
           {error ? (
             <div>{error}</div>
           ) : (
             prolist &&
-            prolist.map((values) => {
+            prolist.filter((values)=>{
+              console.log("valuzzz", values);
+              if (searchString == ""){
+                return values
+              } else if (values.title.toLowerCase().includes(searchString)){
+                return values
+              }
+            }).map((values) => {
               return (
                 <>
                   <div className="col-md-4 product-items">
@@ -43,6 +61,7 @@ const Home = () => {
                 </>
               );
             })
+            
           )}
         </div>
       </div>

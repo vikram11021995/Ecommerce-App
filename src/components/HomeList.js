@@ -1,7 +1,17 @@
 import React from "react";
 import "./Home.css";
+import { addToCart } from "../redux/actions";
+
+import { useDispatch } from "react-redux";
+
 
 const HomeList = ({ values }) => {
+  let dispatch = useDispatch();
+
+
+  const handleSubmit = (values) => {
+      dispatch(addToCart({...values, qty: 1}));
+    }
   return (
     <>
       <div className="container products-list">
@@ -18,7 +28,7 @@ const HomeList = ({ values }) => {
           <p className="text-center">Rating - {values.rating.count}</p>
 
           <div className="text-center">
-            <button className="btn btn-success btn-sm mt-3">
+            <button className="btn btn-success btn-sm mt-3" onClick={()=>{handleSubmit(values)}}>
               + Add To Cart
             </button>
           </div>

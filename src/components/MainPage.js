@@ -1,6 +1,17 @@
-import React from "react";
+import React, {useState} from "react";
 
-const ItemSearch = () => {
+const ItemSearch = (props) => {
+  console.log("props", props);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleChange = (e) =>{
+    setSearchTerm(e.target.value)
+  }
+
+  const handleSearch = () =>{
+    props.handleSearch(searchTerm)
+  }
+
   return (
     <>
       <div className="container">
@@ -14,8 +25,9 @@ const ItemSearch = () => {
                 placeholder="Search"
                 aria-label="Search"
                 aria-describedby="search-addon"
+                onChange ={handleChange}
               />
-              <button type="button" class="btn btn-outline-primary">
+              <button type="button" class="btn btn-outline-primary" onClick={handleSearch}>
                 search
               </button>
             </div>
