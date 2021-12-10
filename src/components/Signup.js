@@ -1,29 +1,28 @@
 import React, { useState } from "react";
-import { propTypes } from "react-bootstrap/esm/Image";
 
 function UserSignup(props) {
   const [username, setUserName] = useState('')
-  const [password1, setPassword1] = useState('');
+  const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
 
 
-  var auth = JSON.parse(localStorage.getItem('auth'));
+  let auth = JSON.parse(localStorage.getItem('auth'));
 
   const handleSignup=()=>{
 
     if(auth === null){
-      auth=[{'username': 'aaa', 'password': 'aaa'}];
+      auth=[{'username': 'username', 'password': 'password'}];
     }
     
-    if(password1 === password2){
+    if(password === password2){
 
       const same = auth.filter(d=>d.username===username);
-      
-      if (same.length === 0){
-        auth = [...auth, {'username': username, 'password': password1}];
+      console.log("same", same);
+      if (same.length===0){
+        auth = [...auth, {'username': username, 'password': password}];
         localStorage.setItem('auth', JSON.stringify(auth));
         setUserName('');
-        setPassword1('');
+        setPassword('');
         setPassword2('');
         props.afterSignup(username);
       }else{
@@ -32,7 +31,7 @@ function UserSignup(props) {
     }
 
     else{
-      alert('Passwords not match')
+      alert('Passwords does not match')
     }
   }
 
@@ -51,12 +50,12 @@ function UserSignup(props) {
             </div>
             <div className="form-group">
               <label>Password</label>
-              <input type="password" className="form-control" onChange={e=>setPassword1(e.target.value)}
-              value={password1}
+              <input type="password" className="form-control" onChange={e=>setPassword(e.target.value)}
+              value={password}
               />
             </div>
             <div className="form-group">
-              <label>Password</label>
+              <label>confirm Password</label>
               <input type="text" className="form-control" onChange={e=>setPassword2(e.target.value)}
               value={password2}
               />

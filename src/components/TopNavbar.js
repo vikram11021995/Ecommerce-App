@@ -2,18 +2,25 @@ import React from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-
 const TopNavbar = () => {
+
+  const logout = () =>{
+    localStorage.clear();
+    window.location.href = '/login';
+  }
+
   return (
     <>
       <div>
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
           <Container>
-            <Navbar.Brand to="{/}">Inara</Navbar.Brand>
+            <Navbar.Brand to="">Inara</Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="me-auto">
-                <Link className="nav-link" to={"/"}>Home</Link>
+                <Link className="nav-link" to={"/"}>
+                  Home
+                </Link>
               </Nav>
               <Nav>
                 <Link className="nav-link" to={"/cart-items"}>
@@ -25,11 +32,17 @@ const TopNavbar = () => {
                 <Link className="nav-link" to={"/signup"}>
                   Sign up
                 </Link>
+                {/* <Link className="nav-link" onClick={logout}>
+                  LOGOUT
+                </Link> */}
               </Nav>
             </Navbar.Collapse>
           </Container>
         </Navbar>
       </div>
+      <div>
+   <Link to="#" onClick={logout}>LOGOUT</Link>
+</div>
     </>
   );
 };

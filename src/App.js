@@ -16,18 +16,21 @@ import {
 } from "react-router-dom";
 
 function App() {
+  // if(localStorage.getItem("storedData")==null){
+	// 	return<UserLogin/>
+	// }else{
   return (
     <Router>
-      <MainScreen/>
       <TopNavbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/cart-items" element={<Cart />} />
         <Route path="/login" element={<UserLogin />} />
-        {/* <Route path="/signup" element={<UserSignup />} /> */}
+        <Route path="/signup" element={<MainScreen />} />
       </Routes>
     </Router>
   );
 }
+// }
 
 export default App;
