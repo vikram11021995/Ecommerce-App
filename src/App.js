@@ -1,4 +1,4 @@
-import react, { Fragment } from "react";
+import react, { Fragment, useState } from "react";
 import "./App.css";
 import TopNavbar from "./components/TopNavbar";
 import UserLogin from "./components/Login";
@@ -16,16 +16,15 @@ import {
 } from "react-router-dom";
 
 function App() {
-  // if(localStorage.getItem("storedData")==null){
-	// 	return<UserLogin/>
-	// }else{
+  const [isLoggedIn, setisLoggedIn] = useState(false)
+
   return (
     <Router>
-      <TopNavbar />
+      <TopNavbar isLoggedIn= {isLoggedIn} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/cart-items" element={<Cart />} />
-        <Route path="/login" element={<UserLogin />} />
+        <Route path="/login" element={<UserLogin setisLoggedIn={setisLoggedIn}/>} />
         <Route path="/signup" element={<MainScreen />} />
       </Routes>
     </Router>

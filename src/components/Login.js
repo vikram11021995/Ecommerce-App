@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { useNavigate, Navigate  } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-const UserLogin = () => {
+const UserLogin = ({setisLoggedIn}) => {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleLogin = () => {
     const storedData = JSON.parse(localStorage.getItem("auth"));
@@ -20,10 +21,10 @@ const UserLogin = () => {
 
     if (filteredUsers) {
       if (filteredUsers.password == password) {
-        // navigate({ pathname: "/" });
-        setIsLoggedIn(true);
+        navigate({ pathname: "/" });
+        setisLoggedIn(true);
       } else {
-        alert("username & password doesnt match");
+        alert("username or password doesn't match");
       }
     } else {
       alert("user not found");
@@ -32,7 +33,7 @@ const UserLogin = () => {
 
   return (
     <>
-    {isLoggedIn && <Navigate  to="/" />}
+      {/* {isLoggedIn && <Navigate to="/home" />} */}
       <div className="container">
         <div className="row mt-5">
           <div className="col-md-4"></div>
@@ -57,12 +58,23 @@ const UserLogin = () => {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
-              <button
-                className="btn btn-danger btn-block mt-3"
-                onClick={handleLogin}
-              >
-                Login
-              </button>
+
+              <div className="d-flex justify-content-between">
+                <div className="mt-2">
+                  <button
+                    className="btn btn-danger btn-block mt-3"
+                    onClick={handleLogin}
+                  >
+                    Login
+                  </button>
+                </div>
+                <div className="mt-2">
+                  <Link className="nav-link" to={"/signup"}>
+                    Sign up
+                  </Link>
+                </div>
+              </div>
+
             </div>
           </div>
           <div className="col-md-4"></div>

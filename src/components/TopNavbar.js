@@ -2,12 +2,12 @@ import React from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-const TopNavbar = () => {
+const TopNavbar = (props) => {
 
-  const logout = () =>{
+  const logout = () => {
     localStorage.clear();
-    window.location.href = '/login';
-  }
+    window.location.href = "/login";
+  };
 
   return (
     <>
@@ -26,23 +26,28 @@ const TopNavbar = () => {
                 <Link className="nav-link" to={"/cart-items"}>
                   Cart Items
                 </Link>
-                <Link className="nav-link" to={"/login"}>
-                  Login
-                </Link>
-                <Link className="nav-link" to={"/signup"}>
-                  Sign up
-                </Link>
-                {/* <Link className="nav-link" onClick={logout}>
-                  LOGOUT
-                </Link> */}
+
+                {props.isLoggedIn ? (
+                  <Link className="nav-link" to="#" onClick={logout}>
+                    LOGOUT
+                  </Link>
+                ) : (
+                  <div>
+                    <Link className="nav-link" to={"/login"}>
+                      Login
+                    </Link>
+                  </div>
+                )}
+
+                  {/* <Link className="nav-link" to="#" onClick={logout}>
+                    LOGOUT
+                  </Link> */}
               </Nav>
             </Navbar.Collapse>
           </Container>
         </Navbar>
       </div>
-      <div>
-   <Link to="#" onClick={logout}>LOGOUT</Link>
-</div>
+      <div></div>
     </>
   );
 };

@@ -7,20 +7,22 @@ import { getProduct } from "../redux/actions";
 
 const Home = () => {
   const [prolist, setProlist] = useState([]);
-  console.log("prolist", prolist);
+  // console.log("prolist", prolist);
   const [error, setError] = useState(null);
   const [searchString, setSearchString] = useState([]);
+  console.log("searchString", searchString);
 
-
-
+  
   let dispatch = useDispatch();
   const productList = useSelector((state) => state.getProduct);
+  // console.log("hiii",productList);
+
 
   useEffect(() => {
     dispatch(getProduct());
-  }, []);
+  }, []); //dependency array
+  // console.log("getProduct", getProduct)
 
-  console.log("hiii",productList);
   useEffect(() => {
     if (productList.list.data) {
       console.log("z",productList)
@@ -32,6 +34,7 @@ const Home = () => {
 
 //
   const handleSearch = (searchStr) =>{
+    console.log("initial value",searchStr)
     setSearchString(searchStr);
   }
 
@@ -39,14 +42,14 @@ const Home = () => {
   return (
     <>
       <div className="container">
-        <ItemSearch handleSearch={handleSearch}/>
+        <ItemSearch handle={handleSearch}/>
         <div className="row">
           {error ? (
             <div>{error}</div>
           ) : (
             prolist &&
             prolist.filter((values)=>{
-              console.log("valuzzz", values);
+              // console.log("valuzzz", values);
               if (searchString == ""){
                 return values
               } else if (values.title.toLowerCase().includes(searchString)){

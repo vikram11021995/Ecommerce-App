@@ -10,7 +10,7 @@ import axios from "axios";
 export const getProduct = ()=>(dispatch) => {
      axios.get("https://fakestoreapi.com/products").then((res)=>{
         dispatch(getProductSuccess(res.data));
-        console.log("hi", res.data);
+        // console.log("hi", res.data);
     }).catch((err)=>{
         dispatch(getProductError("something went wrong"));
     });
