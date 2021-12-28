@@ -1,4 +1,4 @@
-import react, { Fragment, useState } from "react";
+import react, { Fragment, useState, useEffect } from "react";
 import "./App.css";
 import TopNavbar from "./components/TopNavbar";
 import UserLogin from "./components/Login";
@@ -18,11 +18,13 @@ import {
 function App() {
   const [isLoggedIn, setisLoggedIn] = useState(false)
 
+
+
   return (
     <Router>
       <TopNavbar isLoggedIn= {isLoggedIn} />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home setisLoggedIn={setisLoggedIn}/>} />
         <Route path="/cart-items" element={<Cart />} />
         <Route path="/login" element={<UserLogin setisLoggedIn={setisLoggedIn}/>} />
         <Route path="/signup" element={<MainScreen />} />

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
@@ -30,6 +30,12 @@ const UserLogin = ({setisLoggedIn}) => {
       alert("user not found");
     }
   };
+
+  // useEffect(() => {
+  //   const storedData = JSON.parse(localStorage.getItem("auth"));
+  //   console.log("storedData2", storedData);
+  //   setisLoggedIn(true);
+  // }, []);
 
   return (
     <>

@@ -5,7 +5,7 @@ import HomeList from "./HomeList";
 import { useDispatch, useSelector } from "react-redux";
 import { getProduct } from "../redux/actions";
 
-const Home = () => {
+const Home = ({setisLoggedIn}) => {
   const [prolist, setProlist] = useState([]);
   // console.log("prolist", prolist);
   const [error, setError] = useState(null);
@@ -31,6 +31,14 @@ const Home = () => {
       setError(productList.list.error);
     }
   }, [productList.list]);
+
+
+
+  useEffect(() => {
+    const storedData = JSON.parse(localStorage.getItem("auth"));
+    console.log("storedData2", storedData);
+    setisLoggedIn(true);
+  }, []);
 
 //
   const handleSearch = (searchStr) =>{

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
@@ -8,6 +8,11 @@ const TopNavbar = (props) => {
     localStorage.clear();
     window.location.href = "/login";
   };
+
+  // useEffect(() => {
+  //   const storedData = JSON.parse(localStorage.getItem("auth"));
+  //   console.log("storedData2", storedData);
+  // }, []);
 
   return (
     <>

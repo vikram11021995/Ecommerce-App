@@ -10,7 +10,7 @@ function UserSignup(props) {
 
   const handleSignup = () => {
     if (auth === null) {
-      auth = [{ username: "username", password: "password" }];
+      auth = [];
     }
 
     if (password === password2) {
